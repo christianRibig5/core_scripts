@@ -32,9 +32,9 @@
     
         if($count>=1){
             $log_data='{'; 
-                $log_data.= '"response": "emailExist"';
-                $log_data.= '"msg": "THIS EMAIL ALREADY EXISTS"';
-                $log_data.='}' ;
+            $log_data.= '"response": "emailExist"';
+            $log_data.= '"msg": "THIS EMAIL ALREADY EXISTS"';
+            $log_data.='}' ;
             echo "{$log_data}";
         }else{
                 $query2 ="INSERT INTO
