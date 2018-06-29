@@ -13,9 +13,10 @@
 //if(isset($_POST['email']) && isset($_POST['password']) ){
 $email=filter_input(INPUT_POST,"email");
 $password=filter_input(INPUT_POST,"password");
+
 $log_data="";
 
-
+$query="SELECT * FROM users WHERE email = '".$email."'";
 $result=mysqli_query($mysqli,$query);
 if($data=mysqli_fetch_array($result)){
     if(password_verify($password,$data['password'])){
@@ -44,7 +45,7 @@ if($data=mysqli_fetch_array($result)){
                     $log_data='{';
                     $log_data.= '"response": "emailNotVerified", ';
                     $log_data.= '"link": "https://checkartisan.com/email/form.html", ';
-                    $log_data.= '"msg": "DEAR USER  YOU HAVE NOT VERIFIED YOUR EMAIL,  CLICK ON THE LINK TO VERIFY YOUR EMAIL!!!"';
+                    $log_data.= '"msg": "Dear user  you have not verified your email,  click on the link to verify your email"';
                     $log_data.='}' ;
                                             echo "{$log_data}";
                             

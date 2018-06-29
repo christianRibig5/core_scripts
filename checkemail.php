@@ -15,7 +15,7 @@
 
         $log_data='{'; 
         $log_data.= '"response": "emailExist"';
-        $log_data.= '"msg": "THIS EMAIL ALREADY EXISTS"';
+        $log_data.= '"msg": "This email already exist"';
         $log_data.='}' ;
 
         echo "{$log_data}";
@@ -23,7 +23,7 @@
 
         $log_data='{'; 
         $log_data.= '"response": "OK"';
-        $log_data.= '"msg": "THIS EMAIL DOES NOT EXIST"';
+        $log_data.= '"msg": "This email does not exist"';
         $log_data.='}' ;
     
         echo "{$log_data}";
