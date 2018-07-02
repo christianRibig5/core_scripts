@@ -17,16 +17,7 @@
 
     }
 
-    function generatePIN($digits){
-        $i = 0; //counter
-        $pin = ""; //our default pin is blank.
-        while($i < $digits){
-            //generate a random number between 0 and 9.
-            $pin .= mt_rand(0, 9);
-            $i++;
-        }
-        return $pin;
-    }
+
 
 
     class OTP{
@@ -36,10 +27,10 @@
          var $json_url = "http://api.ebulksms.com:8080/sendsms.json";
          var $username = 'abara5000@gmail.com';
          var $apikey = 'fcbae20a8d03d96178820be4f6c044988d79a793';  
-         var $sendername ='Artisan';
+         var $sendername ='CheckArtisan';
          var $recipients; //= '07031293784,';
          var $flash = 0;
-         var $message = 'CheckAtisan code: ';
+         var $message = 'CheckArtisan code: ';
          var $result='NO';
  
          public function __construct($phone){
@@ -58,18 +49,6 @@
             return $pin;
         }
     
- 
-         private function generateCode($digits=4){
-             $i=1;
-             $pin='';
-             while($i<$digits){
-                 $pin.=mt_rand(0,9);
-             }
- 
-             return $pin;
-             
-         }
- 
          private function useJSON($url, $username, $apikey, $flash, $sendername, $messagetext, $recipients) {
              $gsm = array();
              $country_code = '234';
