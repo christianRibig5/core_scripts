@@ -32,6 +32,7 @@ if($data=mysqli_fetch_array($result)){
                     $log_data='{'; // used to log catched data of user from msqldb
                     $log_data.= '"id": "' . preg_replace( "/\r|\n/", " ", $user_id ). '", ';
                     $log_data.= '"email": "' . preg_replace( "/\r|\n/", " ", $email). '", ';
+                    $log_data.= '"role": "' . preg_replace( "/\r|\n/", " ", $user_role). '", ';
                     $log_data.= '"password": "' . preg_replace( "/\r|\n/", " ", $password). '", ';
                     $log_data.= '"response": "OK"';
                     $log_data.='}' ;
