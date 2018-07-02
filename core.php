@@ -27,6 +27,143 @@
         }
         return $pin;
     }
+
+
+    class OTP{
+
+        // var $phonenumebr;
+         var $code="";
+         var $json_url = "http://api.ebulksms.com:8080/sendsms.json";
+         var $username = 'abara5000@gmail.com';
+         var $apikey = 'fcbae20a8d03d96178820be4f6c044988d79a793';  
+         var $sendername ='Artisan';
+         var $recipients; //= '07031293784,';
+         var $flash = 0;
+         var $message = 'CheckAtisan code: ';
+         var $result='NO';
+ 
+         public function __construct($phone){
+             $this->recipients=$phone.',';
+             $this->code=$this->generatePIN(4);
+         } 
+
+         function generatePIN($digits){
+            $i = 0; //counter
+            $pin = ""; //our default pin is blank.
+            while($i < $digits){
+                //generate a random number between 0 and 9.
+                $pin .= mt_rand(0, 9);
+                $i++;
+            }
+            return $pin;
+        }
+    
+ 
+         private function generateCode($digits=4){
+             $i=1;
+             $pin='';
+             while($i<$digits){
+                 $pin.=mt_rand(0,9);
+             }
+ 
+             return $pin;
+             
+         }
+ 
+         private function useJSON($url, $username, $apikey, $flash, $sendername, $messagetext, $recipients) {
+             $gsm = array();
+             $country_code = '234';
+             $arr_recipient = explode(',', $recipients);
+             foreach ($arr_recipient as $recipient) {
+                 $mobilenumber = trim($recipient);
+                 if (substr($mobilenumber, 0, 1) == '0'){
+                     $mobilenumber = $country_code . substr($mobilenumber, 1);
+                 }
+                 elseif (substr($mobilenumber, 0, 1) == '+'){
+                     $mobilenumber = substr($mobilenumber, 1);
+                 }
+                 $generated_id = uniqid('int_', false);
+                 $generated_id = substr($generated_id, 0, 30);
+                 $gsm['gsm'][] = array('msidn' => $mobilenumber, 'msgid' => $generated_id);
+             }
+             $message = array(
+                 'sender' => $sendername,
+                 'messagetext' => $messagetext,
+                 'flash' => "{$flash}",
+             );
+          
+             $request = array('SMS' => array(
+                     'auth' => array(
+                         'username' => $username,
+                         'apikey' => $apikey
+                     ),
+                     'message' => $message,
+                     'recipients' => $gsm
+             ));
+             $json_data = json_encode($request);
+             if ($json_data) {
+                 $response = $this->doPostRequest($url, $json_data, array('Content-Type: application/json'));
+                 $result = json_decode($response);
+                 return $result->response->status;
+             } else {
+                 return false;
+             }
+         }
+ 
+ 
+         //Function to connect to SMS sending server using HTTP POST
+         private function doPostRequest($url, $arr_params, $headers = array('Content-Type: application/x-www-form-urlencoded')) {
+             $response = array();
+             $final_url_data = $arr_params;
+             if (is_array($arr_params)) {
+                 $final_url_data = http_build_query($arr_params, '', '&');
+             }
+             $ch = curl_init();
+             curl_setopt($ch, CURLOPT_URL, $url);
+             curl_setopt($ch, CURLOPT_POSTFIELDS, $final_url_data);
+             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+             curl_setopt($ch, CURLOPT_POST, 1);
+             curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+             curl_setopt($ch, CURLOPT_VERBOSE, 1);
+             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+             $response['body'] = curl_exec($ch);
+             $response['code'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+             curl_close($ch);
+             return $response['body'];
+         }
+ 
+ 
+         public function sendOTP(){
+ 
+             $this->message.=$this->code;
+             $this->result=$this->useJSON($this->json_url, $this->username, $this->apikey, 
+             $this->flash, $this->sendername, $this->message, $this->recipients);
+             if($this->result="SUCCESSFUL"){
+                 return true;
+             }else{
+                 //Message sending was not successful
+                 //May be CREDIT UNIT FINISHED
+                 //we need to send an email to admin here to notify him that sms credit is exhausted 
+                 return true;
+             }
+         }
+ 
+         public function getCode(){
+             return $this->code;
+         }
+
+         public function getResult(){
+            return $this->result;
+        }
+ 
+ 
+ 
+ 
+ 
+     }
+ 
+ 
  
 
 
