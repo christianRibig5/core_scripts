@@ -18,8 +18,6 @@
     }
 
 
-
-
     class OTP{
 
         // var $phonenumebr;
@@ -27,7 +25,7 @@
          var $json_url = "http://api.ebulksms.com:8080/sendsms.json";
          var $username = 'abara5000@gmail.com';
          var $apikey = 'fcbae20a8d03d96178820be4f6c044988d79a793';  
-         var $sendername ='CheckArtisan';
+         var $sendername ='CA';
          var $recipients; //= '07031293784,';
          var $flash = 0;
          var $message = 'CheckArtisan code: ';
@@ -118,7 +116,7 @@
              $this->message.=$this->code;
              $this->result=$this->useJSON($this->json_url, $this->username, $this->apikey, 
              $this->flash, $this->sendername, $this->message, $this->recipients);
-             if($this->result="SUCCESSFUL"){
+             if($this->result=="SUCCESSFUL"){
                  return true;
              }else{
                  //Message sending was not successful
@@ -134,7 +132,7 @@
 
          public function getResult(){
             return $this->result;
-        }
+         }
  
  
  
