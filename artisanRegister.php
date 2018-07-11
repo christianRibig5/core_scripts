@@ -15,13 +15,14 @@
     $email=filter_input(INPUT_POST,"email");
     $phone=filter_input(INPUT_POST,"phone");
     $password=filter_input(INPUT_POST,"password");
+    $token=filter_input(INPUT_POST,"code");
     
             $hashedpwd=password_hash($password,PASSWORD_DEFAULT);
             $role ='Artisan';//filter_input(INPUT_POST,"artisan");
             $user_id =password_hash(uniqid(),PASSWORD_DEFAULT);
             $email_confirmed=1;//true because he was confiremed before storing data in db
            $verification_token=filter_input(INPUT_POST,"code");
-            $remember_token='';
+            $remember_token=$token;
             $regTime=date('Y-m-d H:i:s',time());
             $created_at= $regTime;
             $updated_at = $regTime;
