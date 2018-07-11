@@ -11,27 +11,36 @@
     $query1 = "SELECT * FROM users WHERE email='".$email."'";
     $result= mysqli_query($mysli,$query1);
     if($data=mysqli_fetch_array($result)){
-        $userID=$data['user_id'];
+        $userId =$data['user_id'];
     }
-    $artisanID='';
+    $artisanId='';
     
     $status='unapproved';
     $companyName= filter_input(INPUT_POST,"companyname");
     $tradeType=filter_input(INPUT_POST,"tradetype");
     $otherTradeTypes=filter_input(INPUT_POST,"othertradetypes");
-    $phone=filter_input(INPUT_POST,"phone");
-    $password=filter_input(INPUT_POST,"password");
-    $token=filter_input(INPUT_POST,"code");
-    
-            
-    
-        
-    
-    
+    $address=filter_input(INPUT_POST,"address");
+    $city=filter_input(INPUT_POST,"city");
+    $state=filter_input(INPUT_POST,"state");
+    $country=filter_input(INPUT_POST,"country");
+    $distanceToWork=filter_input(INPUT_POST,"distancetowork");
+    $aboutBusiness=filter_input(INPUT_POST,"description");
+    $textAlert=filter_input(INPUT_POST,"textalert");
+    $alertViaMail=filter_input(INPUT_POST,"alertviamail");
+    $newsLetter=filter_input(INPUT_POST,"newsletter");
+    $profilePics=filter_input(INPUT_POST,"avartar");
+
+    $query = "UPDATE artisan SET 
+             user_id = '$userId', 
+             status = '$status',
+             companyname ='$companyName',
+
+
+             WHERE email = $email";
+             $result=mysqli_query($mysli,$query);
           
-                    $query2 ="INSERT INTO
-                    users(id,user_id,firstname,lastname,email,phone,password,email_confirmed,verification_token,
-                    remember_token,role,created_at,updated_at) VALUES ('0','$user_id','$firstname','$lastname','$email','$phone',
-                    '$hashedpwd','$email_confirmed','$verification_token','$remember_token','$role','$created_at','$updated_at')";
+                    
+
+                   
       
             ?>

@@ -7,6 +7,7 @@ require_once("core.php");
 
 $userPhoneNumber=trim(filter_input(INPUT_POST,"phone"));
 $email=trim(filter_input(INPUT_POST,"email"));
+$email=trim(filter_input(INPUT,"email"));
 
 $log_data='';
 $SMS=new OTP($userPhoneNumber);
