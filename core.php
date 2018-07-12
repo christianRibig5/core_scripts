@@ -17,6 +17,26 @@
 
     }
 
+    function ProfileUpdated($conn,$user_id,$user_role){
+        if($user_role="Artisan"){
+            $query="SELECT id FROM artisans WHERE user_id = '".$user_id."'";
+        }else if($user_role="Client"){
+            $query="SELECT id FROM clients WHERE user_id = '".$user_id."'";
+        }
+        
+        $result=mysqli_query($conn,$query);
+        $count=mysqli_num_rows($result);
+        
+        if($count>=1){
+            //The Email exist in the table
+            return true;
+        }else{
+            //The Email does not exist in the table
+            return false;
+        }
+
+    }
+
 
     function generatePIN($digits){
         $i = 0; //counter
@@ -92,8 +112,9 @@
              $json_data = json_encode($request);
              if ($json_data) {
                  $response = $this->doPostRequest($url, $json_data, array('Content-Type: application/json'));
-                 $result = json_decode($response);
-                 return $result->response->status;
+                  $result = json_decode($response);
+                 //return $response;
+                return $result->response->status;
              } else {
                  return false;
              }
@@ -128,13 +149,13 @@
              $this->message.=$this->code;
              $this->result=$this->useJSON($this->json_url, $this->username, $this->apikey, 
              $this->flash, $this->sendername, $this->message, $this->recipients);
-             if($this->result=="SUCCESSFUL"){
+             if($this->result=="SUCCESS"){
                  return true;
              }else{
                  //Message sending was not successful
                  //May be CREDIT UNIT FINISHED
                  //we need to send an email to admin here to notify him that sms credit is exhausted 
-                 return true;
+                 return false;
              }
          }
  

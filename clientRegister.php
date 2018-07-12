@@ -21,7 +21,7 @@
            $hashedpwd=password_hash($password,PASSWORD_DEFAULT);
            $role ='Client';//filter_input(INPUT_POST,"artisan");
            $user_id =password_hash(uniqid(),PASSWORD_DEFAULT);
-           $email_confirmed=1;//true because he was confiremed before storing data in db
+           $email_confirmed=0;//true because he was confiremed before storing data in db
            
            $token=filter_input(INPUT_POST,"code");
            $verification_token=password_hash($token,PASSWORD_DEFAULT);
