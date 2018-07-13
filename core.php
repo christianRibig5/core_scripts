@@ -17,6 +17,20 @@
 
     }
 
+
+    function validateBase64ImageString($string){
+        $data = explode(',', $string);
+        if(count($data) >= 2)
+        {
+        $format = explode('/', $data[0]);
+        if($format[0] == 'data:image')
+        {
+        return true;
+        }
+        }
+        return false;
+    }
+
     function ProfileUpdated($conn,$user_id,$user_role){
         if($user_role="Artisan"){
             $query="SELECT id FROM artisans WHERE user_id = '".$user_id."'";
