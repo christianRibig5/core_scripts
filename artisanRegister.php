@@ -19,7 +19,7 @@
     
             $hashedpwd=password_hash($password,PASSWORD_DEFAULT);
             $role ='Artisan';//filter_input(INPUT_POST,"artisan");
-            $user_id =password_hash(uniqid(),PASSWORD_DEFAULT);
+            $user_id =substr(password_hash(uniqid(),PASSWORD_DEFAULT),14);
             $email_confirmed=0;//true because he was confiremed before storing data in db
 
             $token=filter_input(INPUT_POST,"code");
