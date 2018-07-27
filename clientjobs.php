@@ -22,7 +22,10 @@ if($count>=1){
         $jobsArray.='"title":"'. preg_replace( "/\r|\n/", " ", $data['jobtitle']). '", ';
         $jobsArray.='"jobtype":"'. preg_replace( "/\r|\n/", " ", $data['jobtype']). '", ';
         $jobsArray.='"budget":"'. preg_replace( "/\r|\n/", " ", $data['jobbudget']). '", ';
-        $jobsArray.='"posted":"'. preg_replace( "/\r|\n/", " ", $data['created_at']). '"} ';
+        $jobsArray.='"posted":"'. preg_replace( "/\r|\n/", " ", $data['created_at']). '", ';
+        $jobsArray.='"timing":"'. preg_replace( "/\r|\n/", " ", $data['jobtiming']). '", ';
+        $jobsArray.='"description":"'. preg_replace( "/\r|\n/", " ", $data['jobdescription']). '", ';
+        $jobsArray.='"location":"'. preg_replace( "/\r|\n/", " ",$data['jobaddress']). '"} ';
 
         if($i<$count){
             $jobsArray.=',';
