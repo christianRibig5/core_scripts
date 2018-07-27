@@ -3,6 +3,6 @@
     define("SERVER","localhost");
     define("USER","root");
     define("PASSWORD","");
-    define("DATABASE","artisan_test_db");
+    define("DATABASE","checkart_cadb");
     $mysqli= new mysqli(SERVER,USER,PASSWORD,DATABASE);
 ?>

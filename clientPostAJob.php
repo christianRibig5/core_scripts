@@ -8,7 +8,8 @@
     $log_data="";
     $user_id= filter_input(INPUT_POST,"user_id");//comes from sharedpreferences android
 
-    $job_id=substr(password_hash(uniqid(),PASSWORD_DEFAULT),13);
+    $job_id=str_random(10);
+    //substr(password_hash(uniqid(),PASSWORD_DEFAULT),13);
     $jobTitle=filter_input(INPUT_POST,"jobtitle");
     $jobtype=filter_input(INPUT_POST,"jobtype");
     $jobDescription= filter_input(INPUT_POST,"jobdescription");
