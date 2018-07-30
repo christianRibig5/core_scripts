@@ -2,6 +2,18 @@
 
     //Ensure that the table name is "users" and 
     //Email field in the database table is named "email"
+
+
+    function str_random($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[mt_rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
+
+
     function EmailExist($conn,$email){
         $query="SELECT email FROM users WHERE email = '".$email."'";
         $result=mysqli_query($conn,$query);

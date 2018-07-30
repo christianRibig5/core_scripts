@@ -9,7 +9,7 @@ $logdata='';
 $artisansArray='';
 
 
-$job_id="VpbOU8C7yy";//filter_input(INPUT_POST,"job_id");
+$job_id=filter_input(INPUT_POST,"job_id");
 
 $query2="SELECT * FROM client_reviews WHERE job_id='".$job_id."'";
 $result2=mysqli_query($mysqli,$query2);

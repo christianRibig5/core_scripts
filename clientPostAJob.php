@@ -23,13 +23,15 @@
     $regTime=date('Y-m-d H:i:s',time());
     $created_at= $regTime;
     $updated_at = $regTime;
+    $quote_invite=0;
+    //$quoting_artisan_id='';
     $avartar='';//filter_input(INPUT_POST,"avartar");
    
 
     $query2 ="INSERT INTO clients (id,job_id,user_id,status,jobtitle,jobtype,jobdescription,jobtiming,
-    jobbudget,jobaddress,jobcity,jobstate,jobcountry,avatar,created_at,updated_at) 
+    jobbudget,jobaddress,jobcity,jobstate,jobcountry,quote_invite,created_at,updated_at) 
     VALUES ('0','$job_id','$user_id','$status','$jobTitle','$jobtype','$jobDescription','$jobTiming','$jobBudget',
-    '$jobAddress','$jobCity','$jobState','$jobCountry','$avartar','$created_at','$updated_at')";
+    '$jobAddress','$jobCity','$jobState','$jobCountry','$quote_invite','$created_at','$updated_at')";
     if(mysqli_query($mysqli,$query2)){
         $log_data='{';
             $log_data.= '"response": "jobPostSuccess",';
