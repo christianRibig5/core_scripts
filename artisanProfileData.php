@@ -13,7 +13,7 @@ $query="SELECT * FROM artisans WHERE artisan_id='".$artisan_id."'";
 $result=mysqli_query($mysqli,$query);
 if($data=mysqli_fetch_array($result)){
 
-    $query2="SELECT client_reviews.job_id,client_reviews.comments,client_reviews.created_at,users.firstname,clients.jobtitle FROM client_reviews INNER JOIN users ON client_reviews.client_id=users.user_id INNER JOIN clients ON client_reviews.client_id=clients.user_id WHERE client_reviews.artisan_user_id='".$artisan_id."'";
+    $query2="SELECT client_reviews.job_id,client_reviews.comments,client_reviews.created_at,users.firstname,clients.jobtitle FROM client_reviews INNER JOIN users ON client_reviews.client_id=users.user_id INNER JOIN clients ON client_reviews.job_id=clients.job_id WHERE client_reviews.artisan_user_id='".$artisan_id."'";
     $result2=mysqli_query($mysqli,$query2);
     $count=mysqli_num_rows($result2);
 
@@ -42,7 +42,7 @@ if($data=mysqli_fetch_array($result)){
         $logdata.='"registered":"'. preg_replace( "/\r|\n/", " ","Registered Member since ". $data['created_at']). '", ';
         $logdata.='"about":"'. preg_replace( "/\r|\n/", " ", $data['description']). '", ';
         $logdata.='"image":"'. preg_replace( "/\r|\n/", " ", $data['avatar']). '", ';
-        $logdata.='"skills":"'. preg_replace( "/\r|\n/", " ", $data['othertradetypes']). '", ';
+        $logdata.='"skills":'. preg_replace( "/\r|\n/", " ", $data['othertradetypes']). ', ';
         $logdata.='"reviews":'."[{$artisan_reviews_array}]".'}'; 
         echo "{$logdata}";
 }else{

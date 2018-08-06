@@ -18,7 +18,7 @@ if($user=="app"){
         while($data=mysqli_fetch_array($result)){
             $i++;
             $catArray.='{';
-            $catArray.='"id":"'. preg_replace( "/\r|\n/", " ", $data['tradetype']). '", ';
+            $catArray.='"id":"'. preg_replace( "/\r|\n/", " ", $data['id']). '", ';
             $catArray.='"title":"'. preg_replace( "/\r|\n/", " ", $data['trade']). '", ';
             $catArray.='"img":"'. preg_replace( "/\r|\n/", " ", $data['src']). '"} ';
 

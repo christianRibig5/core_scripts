@@ -21,7 +21,7 @@ $count2=mysqli_num_rows($result2);
 $query1="SELECT * FROM artisans INNER JOIN  jobs_requests ON artisans.user_id=jobs_requests.artisan_user_id INNER JOIN users ON artisans.user_id=users.user_id WHERE jobs_requests.job_id='".$job_id."' ORDER BY jobs_requests.id DESC";
 $result=mysqli_query($mysqli,$query1);
 $count=mysqli_num_rows($result);
-//echo ' '.mysqli_error($mysqli);
+
 if($count>=1){
     $i=0;
     while($data=mysqli_fetch_array($result)){
