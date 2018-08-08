@@ -44,10 +44,12 @@
     }
 
     function ProfileUpdated($conn,$user_id,$user_role){
-        if($user_role="Artisan"){
+        if($user_role=="Artisan"){
             $query="SELECT id FROM artisans WHERE user_id = '".$user_id."'";
-        }else if($user_role="Client"){
+        }else if($user_role=="Client"){
             $query="SELECT id FROM clients WHERE user_id = '".$user_id."'";
+        }else{
+            $query="SELECT id FROM artisans WHERE user_id = '".$user_id."'"; 
         }
         
         $result=mysqli_query($conn,$query);
@@ -61,6 +63,14 @@
             return false;
         }
 
+    }
+
+    function getArtisanData($conn,$userid){
+        $queryArtisanDetail="SELECT * FROM artisans WHERE user_id='".$userid."'";
+        $resultArtisanDetail=mysqli_query($conn,$queryArtisanDetail);
+        $artisanData=mysqli_fetch_array($resultArtisanDetail);
+
+        return $artisanData;
     }
 
 

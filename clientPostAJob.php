@@ -19,7 +19,7 @@
     $jobCity=filter_input(INPUT_POST,"jobcity");
     $jobState=filter_input(INPUT_POST,"jobstate");
     $jobCountry=filter_input(INPUT_POST,"jobcountry");
-    $status='Posted';
+    $status='Awaiting Quotes';
     $regTime=date('Y-m-d H:i:s',time());
     $created_at= $regTime;
     $updated_at = $regTime;

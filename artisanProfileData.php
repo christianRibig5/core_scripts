@@ -25,7 +25,7 @@ if($data=mysqli_fetch_array($result)){
                 $artisan_reviews_array.='"job_id":"'. preg_replace( "/\r|\n/", " ", $data2['job_id']). '", ';
                 $artisan_reviews_array.='"jobTitle":"'. preg_replace( "/\r|\n/", " ", $data2['jobtitle']). '", ';
                 $artisan_reviews_array.='"reviewMessage":"'. preg_replace( "/\r|\n/", " ", $data2['comments']). '", ';
-                $artisan_reviews_array.='"reviewInfo":"'. preg_replace( "/\r|\n/", " ","Reviewed by ". $data2['firstname']." on ".$data['created_at']). '"} ';
+                $artisan_reviews_array.='"reviewInfo":"'. preg_replace( "/\r|\n/", " ","Reviewed by ". $data2['firstname']." on ".$data2['created_at']). '"} ';
                 if($i<$count){
                     $artisan_reviews_array.=',';
                 }
