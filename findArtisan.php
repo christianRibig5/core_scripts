@@ -11,7 +11,8 @@
    
    
   // $theTrade="BUILDER";//strtoupper(filter_input(INPUT_POST,"tradetype"));
-   $theCity="Umuahia";//ucfirst((filter_input(INPUT_POST,"city")));
+  // TODO: Test and remove hardcoded data
+   $theCity="Umuahia";//ucfirst((filter_input(INPUT_POST,"city"))); 
     if(isset($theTrade)){
         $query="SELECT tradetype FROM c_a__trade_types WHERE trade='$theTrade'";
         $result=mysqli_query($mysqli,$query);
