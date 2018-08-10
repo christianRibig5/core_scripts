@@ -20,7 +20,7 @@ $Updated_at=$regTime;
 
 $query="INSERT INTO client_reviews (id,client_id,job_id,artisan_user_id,quality_review,reliability_review,value_review,comments,created_at,updated_at) VALUES ('0','$client_id','$job_id','$artisan_id','$quality_review','$reliability_review','$value_review','$comment','$created_at','$Updated_at')";
 $query2="UPDATE clients SET status='Job Completed' WHERE job_id='".$job_id."'";
-if(mysqli_query($mysqli,$query)){
+if(mysqli_query($mysqli,$query) && mysqli_query($mysqli,$query2)){
     $log_data='{';
         $log_data.= '"response": "ReviewPostSuccess",';
         $log_data.= '"msg": "Client review posted successfully"';
