@@ -20,6 +20,7 @@ if(EmailExist($mysqli,$email)){
     echo "{$log_data}";
 }else{
 
+
     if($SMS->sendOTP()){
         $code=$SMS->getCode();
         

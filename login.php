@@ -54,7 +54,7 @@ if($data=mysqli_fetch_array($result)){
                         $resultJobList=mysqli_query($mysqli,$queryJobList);
                         $countJobList=mysqli_num_rows($resultJobList);
 
-                        $queryQuoteInvite="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id WHERE clients.jobtype='".$user_tradetype."' AND clients.quoting_artisan_id='".$userid."' AND clients.quote_invite='1'";
+                        $queryQuoteInvite="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id WHERE clients.jobtype='".$user_tradetype."' AND clients.quoting_artisan_id='".$artisan_user_id."' AND clients.quote_invite='1'";
                         $resultQuoteInvite=mysqli_query($mysqli,$queryQuoteInvite);
                         $countQuoteInvite=mysqli_num_rows($resultQuoteInvite);
 
@@ -68,6 +68,7 @@ if($data=mysqli_fetch_array($result)){
                         $log_data.= '"jobListCount": "' . preg_replace( "/\r|\n/", " ", $countJobList). '", ';
                         $log_data.= '"quoteInviteCount": "' . preg_replace( "/\r|\n/", " ", $countQuoteInvite). '", ';
                         $log_data.= '"ReviewsCount": "' . preg_replace( "/\r|\n/", " ", $countReviews). '", ';
+                        $log_data.= '"JobPostingCheckId": "' . preg_replace( "/\r|\n/", " ", $artisan_user_id). '", ';
                     }
                     $log_data.= '"phone": "' . preg_replace( "/\r|\n/", " ", $phone).'", ';
                     $log_data.= '"firstname": "' . preg_replace( "/\r|\n/", " ", $firstName). '", ';

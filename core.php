@@ -146,9 +146,9 @@
                      'recipients' => $gsm
              ));
              $json_data = json_encode($request);
-             if ($json_data) {
-                 $response = $this->doPostRequest($url, $json_data, array('Content-Type: application/json'));
-                  $result = json_decode($response);
+             $response = $this->doPostRequest($url, $json_data, array('Content-Type: application/json'));
+             $result = json_decode($response);
+             if ($result) {  
                  //return $response;
                 return $result->response->status;
              } else {

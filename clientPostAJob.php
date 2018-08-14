@@ -26,12 +26,22 @@
     $quote_invite=0;
     //$quoting_artisan_id='';
     $avartar='';//filter_input(INPUT_POST,"avartar");
-   
+    if(isset($_POST['requestedArtisanId'])){
+        $requested_Artisan_Id=filter_input(INPUT_POST,"requestedArtisanId");
+        $quote_invite=1;
 
-    $query2 ="INSERT INTO clients (id,job_id,user_id,status,jobtitle,jobtype,jobdescription,jobtiming,
+        $query2 ="INSERT INTO clients (id,job_id,user_id,status,jobtitle,jobtype,jobdescription,jobtiming,
+    jobbudget,jobaddress,jobcity,jobstate,jobcountry,quote_invite,quoting_artisan_id,created_at,updated_at) 
+    VALUES ('0','$job_id','$user_id','$status','$jobTitle','$jobtype','$jobDescription','$jobTiming','$jobBudget',
+    '$jobAddress','$jobCity','$jobState','$jobCountry','$quote_invite','$requested_Artisan_Id','$created_at','$updated_at')";
+    }else{
+        $query2 ="INSERT INTO clients (id,job_id,user_id,status,jobtitle,jobtype,jobdescription,jobtiming,
     jobbudget,jobaddress,jobcity,jobstate,jobcountry,quote_invite,created_at,updated_at) 
     VALUES ('0','$job_id','$user_id','$status','$jobTitle','$jobtype','$jobDescription','$jobTiming','$jobBudget',
     '$jobAddress','$jobCity','$jobState','$jobCountry','$quote_invite','$created_at','$updated_at')";
+    }
+
+    
     if(mysqli_query($mysqli,$query2)){
         $log_data='{';
             $log_data.= '"response": "jobPostSuccess",';
