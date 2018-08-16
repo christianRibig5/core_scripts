@@ -46,9 +46,7 @@ if($data=mysqli_fetch_array($result)){
                         $avatar=$artisanData['avatar'];
                         $artisan_user_id=$artisanData['artisan_id'];
 
-                        $queryJobAlert="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id WHERE clients.jobtype='".$user_tradetype."' AND clients.quote_invite='0' AND clients.status='Awaiting Quotes' ORDER BY clients.created_at DESC";
-                        $resultJobAlert=mysqli_query($mysqli,$queryJobAlert);
-                        $countJobAlert=mysqli_num_rows($resultJobAlert);
+                        $countJobAlert=CountJobAlert($mysqli,$user_tradetype,$userid);
 
                         $queryJobList="SELECT * FROM clients INNER JOIN jobs_requests ON clients.job_id=jobs_requests.job_id WHERE jobs_requests.artisan_user_id='".$userid."' ORDER BY jobs_requests.created_at DESC";
                         $resultJobList=mysqli_query($mysqli,$queryJobList);

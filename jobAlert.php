@@ -9,9 +9,10 @@
    $jobAlertArray="";
 
    $tradeType=filter_input(INPUT_POST,"tradetype");
+   $artisan_id=filter_input(INPUT_POST,"artisan_id");
    $query="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id
     WHERE clients.jobtype='".$tradeType."' AND clients.quote_invite='0' AND 
-    clients.status='Awaiting Quotes' ORDER BY clients.created_at DESC";
+    clients.status='Awaiting Quotes' AND clients.user_id!='".$artisan_id."' ORDER BY clients.created_at DESC";
           $result=mysqli_query($mysqli,$query);
           $count=mysqli_num_rows($result);
           
@@ -20,11 +21,21 @@
             while($data=mysqli_fetch_array($result)){
                 $i++;
 
-                $query2="SELECT id FROM jobs_requests WHERE job_id='".$data['job_id']."'";
+                $query2="SELECT artisan_user_id FROM jobs_requests WHERE job_id='".$data['job_id']."'";
                 $result2=mysqli_query($mysqli,$query2);
                 $count2=mysqli_num_rows($result2);
+                $artisanHaveShowInterest=0;
+                if($count2>=1){
+                    while($data2=mysqli_fetch_array($result2)){
+                        if($data2['artisan_user_id']==$artisan_id){
+                            $artisanHaveShowInterest=1;
+                            break;
+                        }
+                    }
+                }
+                
                 //check if upto three artisans have shown intrest and skip the job if true
-                if($count2==3){
+                if($count2==3 || $artisanHaveShowInterest==1){
                     continue;
                 }
 

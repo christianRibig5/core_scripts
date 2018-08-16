@@ -14,6 +14,54 @@
     }
 
 
+
+    function CountJobAlert($conn,$tradeType,$artisan_id){
+        $query="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id
+    WHERE clients.jobtype='".$tradeType."' AND clients.quote_invite='0' AND 
+    clients.status='Awaiting Quotes' AND clients.user_id!='".$artisan_id."' ORDER BY clients.created_at DESC";
+          $result=mysqli_query($conn,$query);
+          $count=mysqli_num_rows($result);
+          
+          if($count>=1){
+            $i=0;
+            while($data=mysqli_fetch_array($result)){
+                
+
+                $query2="SELECT artisan_user_id FROM jobs_requests WHERE job_id='".$data['job_id']."'";
+                $result2=mysqli_query($conn,$query2);
+                $count2=mysqli_num_rows($result2);
+                $artisanHaveShowInterest=0;
+                if($count2>=1){
+                    while($data2=mysqli_fetch_array($result2)){
+                        if($data2['artisan_user_id']==$artisan_id){
+                            $artisanHaveShowInterest=1;
+                            break;
+                        }
+                    }
+                }
+                
+                //check if upto three artisans have shown intrest and skip the job if true
+                if($count2==3 || $artisanHaveShowInterest==1){
+                    continue;
+                }
+
+                $i++;
+            }
+
+            return $i;
+             
+        }else{
+            return 0;
+        }
+    }
+
+
+    function UpdateJobQuoteStatus($mysqli,$job_id){
+        $query="UPDATE clients SET quote_status='Accepted' WHERE job_id='".$job_id."'";
+        mysqli_query($mysqli,$query);
+    }
+
+
     function EmailExist($conn,$email){
         $query="SELECT email FROM users WHERE email = '".$email."'";
         $result=mysqli_query($conn,$query);
@@ -150,6 +198,7 @@
              $result = json_decode($response);
              if ($result) {  
                  //return $response;
+                 //echo $result->response;
                 return $result->response->status;
              } else {
                  return false;

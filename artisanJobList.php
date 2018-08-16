@@ -9,7 +9,7 @@
    $jobListArray='';
    
 
-   $artisanId=filter_input(INPUT_POST,"artisan_user_id");
+   $artisanId="zCzSlXnsagocrwwtW1sE";//filter_input(INPUT_POST,"artisan_user_id");
    $query="SELECT clients.jobtitle,clients.status,clients.jobcity,clients.jobstate,clients.created_at,
    clients.job_id,clients.jobtype,clients.jobdescription,clients.jobtiming,clients.jobbudget,
    clients.jobaddress,clients.jobcountry,jobs_requests.artisan_user_id FROM clients INNER JOIN jobs_requests ON clients.job_id = jobs_requests.job_id WHERE jobs_requests.artisan_user_id='".$artisanId."'";
@@ -24,9 +24,9 @@
                 $jobListArray.='"jobtitle":"'. preg_replace( "/\r|\n/", " ", $data['jobtitle']). '", ';
                 $jobListArray.='"job_id":"'. preg_replace( "/\r|\n/", " ", $data['job_id']). '", ';
                 $jobListArray.='"jobtype":"'. preg_replace( "/\r|\n/", " ", $data['jobtype']). '", ';
-                $jobListArray.='"budget":"'. preg_replace( "/\r|\n/", " ", $data['jobbudget']). '", ';
-                $jobListArray.='"timing":"'. preg_replace( "/\r|\n/", " ", $data['jobtiming']). '", ';
-                $jobListArray.='"description":"'. preg_replace( "/\r|\n/", " ", $data['jobdescription']). '", ';
+                $jobListArray.='"job_budget":"'.$data['jobbudget']. '", ';
+                $jobListArray.='"job_timing":"'. preg_replace( "/\r|\n/", " ", $data['jobtiming']). '", ';
+                $jobListArray.='"job_description":"'. preg_replace( "/\r|\n/", " ", $data['jobdescription']). '", ';
                 $jobListArray.='"address":"'. preg_replace( "/\r|\n/", " ", $data['jobaddress']). '", ';
                 if($data['status']=="Job Completed"){
                     $query3="SELECT * FROM client_reviews INNER JOIN artisans ON 
