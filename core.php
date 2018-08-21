@@ -15,7 +15,7 @@
     }
 
     // function to get all clientjobcount
-    function getJobCount($conn,$id){
+    function getClientPostedJobCount($conn,$id){
         $query="SELECT * FROM clients WHERE user_id = '".$id."' ORDER BY id DESC";
         $result=mysqli_query($conn,$query);
         $count=mysqli_num_rows($result);
