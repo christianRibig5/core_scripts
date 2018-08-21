@@ -7,7 +7,7 @@ require_once("core.php");
 
 $logdata='';
 $jobsArray='';
-$user_id=filter_input(INPUT_POST,"user_id");//'$2y$10$B4O9pBGqz/aXlIMYurb6aemuPsOxvt4ShRlhhUaBG5iaZU.ilO6Ya';
+$user_id=filter_input(INPUT_POST,"user_id");
 
 $query="SELECT * FROM clients WHERE user_id = '".$user_id."' ORDER BY id DESC";
 $result=mysqli_query($mysqli,$query);

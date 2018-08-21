@@ -15,7 +15,7 @@
   
    $query="SELECT * FROM clients 
             INNER JOIN users ON clients.user_id = users.user_id 
-            WHERE clients.quoting_artisan_id='".$artisan_user_id."' AND clients.quote_invite='1' ORDER BY clients.id DESC";
+            WHERE clients.quoting_artisan_id='".$artisan_user_id."' AND clients.quote_invite='1' AND clients.quote_status='Unaccepted' ORDER BY clients.id DESC";
           $result=mysqli_query($mysqli,$query);
           $count=mysqli_num_rows($result);
           if($count>=1){

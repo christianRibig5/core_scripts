@@ -14,6 +14,11 @@
     }
 
 
+    function sanitizeVar($input){
+       return htmlspecialchars(addslashes(trim($input)));
+    }
+
+
 
     function CountJobAlert($conn,$tradeType,$artisan_id){
         $query="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id

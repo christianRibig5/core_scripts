@@ -52,7 +52,7 @@ if($data=mysqli_fetch_array($result)){
                         $resultJobList=mysqli_query($mysqli,$queryJobList);
                         $countJobList=mysqli_num_rows($resultJobList);
 
-                        $queryQuoteInvite="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id WHERE clients.jobtype='".$user_tradetype."' AND clients.quoting_artisan_id='".$artisan_user_id."' AND clients.quote_invite='1'";
+                        $queryQuoteInvite="SELECT * FROM users INNER JOIN clients ON users.user_id=clients.user_id WHERE clients.jobtype='".$user_tradetype."' AND clients.quoting_artisan_id='".$artisan_user_id."' AND clients.quote_invite='1' AND clients.quote_status='Unaccepted'";
                         $resultQuoteInvite=mysqli_query($mysqli,$queryQuoteInvite);
                         $countQuoteInvite=mysqli_num_rows($resultQuoteInvite);
 
@@ -67,6 +67,13 @@ if($data=mysqli_fetch_array($result)){
                         $log_data.= '"quoteInviteCount": "' . preg_replace( "/\r|\n/", " ", $countQuoteInvite). '", ';
                         $log_data.= '"ReviewsCount": "' . preg_replace( "/\r|\n/", " ", $countReviews). '", ';
                         $log_data.= '"JobPostingCheckId": "' . preg_replace( "/\r|\n/", " ", $artisan_user_id). '", ';
+                        $log_data.= '"companyName": "' . preg_replace( "/\r|\n/", " ", $artisanData['companyname']). '", ';
+                        $log_data.= '"city": "' . preg_replace( "/\r|\n/", " ", $artisanData['city']). '", ';
+                        $log_data.= '"state": "' . preg_replace( "/\r|\n/", " ", $artisanData['state']). '", ';
+                        $log_data.= '"country": "' . preg_replace( "/\r|\n/", " ", $artisanData['country']). '", ';
+                        $log_data.= '"posted": "' . preg_replace( "/\r|\n/", " ", $artisanData['created_at']). '", ';
+                        $log_data.= '"address": "' . preg_replace( "/\r|\n/", " ", $artisanData['address']). '", ';
+
                     }
                     $log_data.= '"phone": "' . preg_replace( "/\r|\n/", " ", $phone).'", ';
                     $log_data.= '"firstname": "' . preg_replace( "/\r|\n/", " ", $firstName). '", ';

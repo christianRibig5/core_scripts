@@ -63,10 +63,10 @@
 
     }else{
         $log_data='{'; 
-            $log_data.= '"response": "",';
+            $log_data.= '"response": "NO",';
             $log_data.= '"msg": "artisan update unsuccesful"';
             $log_data.='}' ;
-        echo mysqli_error($mysqli)."{$log_data}";
+        echo "{$log_data}";
     }
 
     

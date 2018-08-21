@@ -21,6 +21,9 @@
         $query ="INSERT INTO jobs_requests(id,job_id,artisan_user_id,job_status,created_at,updated_at)
                  VALUES ('0','$job_id','$artisan_user_id','$job_status','$created_at','$updated_at')";
         if(mysqli_query($mysqli,$query)){
+            if(isset($_POST['isQouted'])){
+                UpdateJobQuoteStatus($mysqli,$job_id);
+            }
             $log_data='{'; 
              $log_data.= '"response": "IntrestPostSuccess",';
              $log_data.= '"msg": "Artisan Interested recorded"';
