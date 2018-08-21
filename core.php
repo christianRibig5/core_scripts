@@ -2,6 +2,7 @@
 
     //Ensure that the table name is "users" and 
     //Email field in the database table is named "email"
+    //ADDED ANOTHER COMMENT
 
 
     function str_random($length = 10) {
